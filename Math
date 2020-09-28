@@ -1,0 +1,154 @@
+DAY 1
+
+#1
+
+Given a number N, find all factors of N.
+Example:
+N = 6 
+factors = {1, 2, 3, 6}
+Make sure the returned array is sorted.
+
+vector<int> Solution::allFactors(int A) 
+{
+    vector<int> arr;
+    for(int i=1;i<sqrt(A);i++)
+    {
+        if(A%i==0) 
+            arr.push_back(i);
+    }
+    for(int i=sqrt(A);i>=1;i--)
+    {
+        if(A%i==0) 
+            arr.push_back(A/i);
+    }
+    return arr;
+}
+
+#2
+
+Given a number N, verify if N is prime or not.
+Return 1 if N is prime, else return 0.
+Example :
+Input : 7
+Output : True
+
+int Solution::isPrime(int A) 
+{
+    if(A==1)
+        return 0;
+    int cnt=2;
+    for(int i=2;i<=sqrt(A);i++)
+    {
+        if(A%i==0)
+            cnt++;
+    }
+    if(cnt==2)
+        return 1;
+    else
+        return 0;
+}
+
+OR
+
+int Solution::isPrime(int A) 
+{
+  if(A==1||A==0||A%2==0) return false;
+  int upperlt=sqrt(A);
+  for(int i=3;i<=upperlt;i=i+2){
+    if(A%i==0) return false;
+    }
+    return true;
+}
+
+vector<int> Solution::sieve(int n) 
+{
+    bool a[n+1];
+    for(int i=0;i<=n;i++){
+     a[i]=true;
+    }
+     a[0]=false;
+     a[1]=false;
+ 
+     for(int i=2;(i*i)<=n;i++){
+     
+     if(a[i]==true){
+         for(int j=i*i;j<=n;j=j+i){
+             a[j]=false;
+         }
+     }
+     
+     
+     }
+     vector<int> v;
+     for(int i=2;i<=n;i++){
+         if(a[i]==true){
+             v.push_back(i);
+         }
+     }
+     return v;
+}
+
+#3
+
+Given a number N, find all prime numbers upto N ( N included ).
+Example:
+if N = 7,
+all primes till 7 = {2, 3, 5, 7}
+Make sure the returned array is sorted.
+
+vector Solution::sieve(int A) {
+int Primes[A+1];
+vector myvector;
+for(int i=0;i<=A;i++){Primes[i]=1;}
+Primes[0]=0;
+Primes[1]=0;
+for(int i=2;i<=A;i++)
+{if(Primes[i]==1)
+{
+for(int j=2;i*j<=A;j++)
+{Primes[i*j]=0;}
+}
+}
+
+ for(int i=2;i<=A;i++)
+  {if(Primes[i]){myvector.push_back(i);}}
+  return myvector;
+}
+
+#4
+
+Given a positive integer A, return an array of strings with all the integers from 1 to N.
+But for multiples of 3 the array should have “Fizz” instead of the number.
+For the multiples of 5, the array should have “Buzz” instead of the number.
+For numbers which are multiple of 3 and 5 both, the array should have “FizzBuzz” instead of the number.
+Look at the example for more details.
+Example
+A = 5
+Return: [1 2 Fizz 4 Buzz]
+
+vector<string> Solution::fizzBuzz(int A) 
+{
+    vector<string> v;
+    for(int i=1;i<=A;i++)
+    {
+        if(i%3==0 && i%5==0)
+        {
+            v.push_back("FizzBuzz");
+        }
+        else if(i%3==0)
+        {
+            v.push_back("Fizz");
+        }    
+        else if(i%5==0)
+        {
+            v.push_back("Buzz");
+        }    
+        else
+        {
+            string st = to_string(i);
+            v.push_back(st);
+        }
+    }
+    return v;
+}
+

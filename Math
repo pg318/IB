@@ -124,3 +124,36 @@ vector<string> Solution::fizzBuzz(int A)
     return v;
 }
 
+#5
+
+Given an even number ( greater than 2 ), return two prime numbers whose sum will be equal to given number.
+Example:
+Input : 4
+Output: 2 + 2 = 4
+If there are more than one solutions possible, return the lexicographically smaller solution.
+If [a, b] is one solution with a <= b,
+and [c,d] is another solution with c <= d, then
+[a, b] < [c, d] 
+If a < c OR a==c AND b < d. 
+
+int isPrime(int n)
+{
+    for(int i=2;i<=sqrt(n);i++)
+    {
+        if(n%i==0) return false;
+    }
+    return true;
+}
+
+vector<int> Solution::primesum(int n) {
+    vector<int> v;
+    for(int i=2;i<=n/2;i++)
+    {
+        if( isPrime(i) && isPrime(n-i) )
+        {
+            v.push_back(i);
+            v.push_back(n-i);
+            return v;
+        }
+    }
+}

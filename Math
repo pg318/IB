@@ -157,3 +157,107 @@ vector<int> Solution::primesum(int n) {
         }
     }
 }
+
+#6
+
+Given a number N >= 0, find its representation in binary.
+Example:
+if N = 6,
+binary form = 110
+
+tring Solution::findDigitsInBinary(int A) 
+{
+    string bin;
+    int r;
+    if(A==0) 
+    {
+        bin+='0';
+        return bin;
+    }
+    else
+    {
+    while(A>0)
+    {
+        r=A%2;
+        A=A/2;
+        bin+= to_string(r);
+        
+    }
+    reverse(bin.begin(),bin.end()); 
+    return bin;
+    }
+}
+
+#7
+
+Hamming distance between two non-negative integers is defined as the number of positions at which the corresponding bits are different.
+Given an array A of N non-negative integers, find the sum of hamming distances of all pairs of integers in the array. Return the answer modulo 1000000007.
+Problem Constraints
+1 <= |A| <= 200000
+1 <= A[i] <= 109
+Input Format
+First and only argument is array A.
+Output Format
+Return one integer, the answer to the problem.
+Example Input
+Input 1:
+A = [1]
+Input 2:
+A = [2, 4, 6]
+
+int Solution::hammingDistance(const vector<int> &A) {
+    int n = A.size();
+    int mod = 1000000007;
+    int sum = 0;
+    for (int bitPosition = 0; bitPosition < 32; bitPosition++) {
+        int cntBitOne = 0, cntBitZero = 0;
+        for(int i = 0; i < n; i++) {
+            if (A[i] & (1 << bitPosition)) cntBitOne++;
+            else cntBitZero++;
+        }
+        sum = sum + ((2LL * cntBitOne * cntBitZero) % mod);
+        if (sum >= mod) sum = sum - mod;
+    }
+    return sum;
+}
+    // int i=0;j=0;
+    //brute force approach
+    // int count=0;
+    // for(int i=0;i<A.size();i++){
+    //     for(int j=0;j<A.size();j++){
+    //         if(i<j){
+    //             int a=A.at(i);
+    //             int b=A.at(j);
+    //             int c =a^b;
+    //             //count number of set bits in c
+                
+    //             while(c){
+    //                 c=(c & c-1);
+    //                 count++;
+    //             }
+    //             count=count%1000000007;
+    //             // count=count*2;
+    //         }
+    //     }
+    // }
+    // count=count%1000000007;
+    // count=count*2;
+    // count=count%1000000007;
+
+
+Given a column title A as appears in an Excel sheet, return its corresponding column number.
+Problem Constraints
+1 <= |A| <= 100
+Input Format
+First and only argument is string A.
+Output Format
+Return an integer
+
+int Solution::titleToNumber(string s) {
+    int result = 0;
+       for (int i = 0; i < s.size(); i++) {
+               result  = result * 26 + (s[i] - 'A' + 1);
+       }
+       return result;
+
+}
